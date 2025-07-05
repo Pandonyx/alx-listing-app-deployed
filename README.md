@@ -40,10 +40,10 @@ TailwindCSS - Utility-first CSS framework
 ESLint - Code linting
 
 
-## Step 11: Test Your Setup
+##  Test Your Setup
 
 Now let's test everything by running the project:
 
 ```bash
 npm run dev
-Open your browser and go to http://localhost:3000. You should see the default Next.js welcome page.
+Open your browser and go to http://localhost:3000. 
