@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       colors: {
         // Primary brand colors from the Figma design
-        'brand-teal': '#10B981', // The teal color from the design
-        'brand-orange': '#F59E0B', // The orange accent color
+        'brand-teal': '#34967C', // The teal color from the design
+        'brand-orange': '#FFA800', // The orange accent color
         'brand-gray': {
           50: '#F9FAFB',
           100: '#F3F4F6',
