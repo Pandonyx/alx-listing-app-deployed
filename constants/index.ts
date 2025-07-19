@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://api.example.com';
+
 
 // UI Text
 export const UI_TEXT = {
@@ -375,3 +375,4 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
     discount: ""
   }
 ];
+

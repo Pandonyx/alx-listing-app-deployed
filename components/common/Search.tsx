@@ -1,4 +1,4 @@
-// components/common/Search.tsx
+import Image from "next/image";
 import React from "react";
 
 
@@ -55,10 +55,10 @@ const Search = () => {
       
       <button
         type="submit"
-        className="m-2 flex h-10 w-10 items-center justify-center rounded-full bg-[#ffb400] hover:bg-[#ffa000] focus:outline-none"
+        className="m-2 flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange hover:bg-[#ffa000] focus:outline-none"
         aria-label="Search"
       >
-        <img src="/assets/icons/Magnifer.svg" alt="Search" size={18} className="text-white" />
+        <Image src="/assets/icons/Magnifer.svg" alt="Search" width={18} height={18} className="text-white" />
       </button>
     </div>
   );

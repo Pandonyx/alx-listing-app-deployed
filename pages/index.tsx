@@ -1,22 +1,22 @@
-import Card from '../components/common/Card';
-import Button from '../components/common/Button';
-import Header from '../components/layout/Header';
+import Image from "next/image";
+
+
 
 
 export default function Home() {
   return (
-    <div className="">
-      
-      <h1 className="mb-8 text-3xl font-bold">test</h1>
-      
-      <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
-        
-        
-      </div>
-      
-      <div className="space-x-4">
-        <Button text="Book Now" variant="primary" />
-        <Button text="View Details" variant="secondary" />
+    <div className="flex flex-col items-center min-h-screen bg-gray-100">
+      <div className="relative w-full max-w-6xl h-[300px] md:h-[420px] mt-6">
+      <Image src="/assets/images/HeroBG.jpg" alt=""  fill priority className="object-cover rounded-2xl"/>
+      <div className="absolute inset-0 bg-black/30 rounded-2xl" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
+          <h1 className="text-3xl font-bold md:text-6xl drop-shadow-lg">
+            Find your favorite place here!
+          </h1>
+          <p className="mt-2 text-sm md:text-xl drop-shadow">
+            The best prices for over 2&nbsp;million properties worldwide
+          </p>
+        </div>
       </div>
     </div>
   );
