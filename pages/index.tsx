@@ -6,7 +6,7 @@ import Header from '../components/layout/Header';
 export default function Home() {
   return (
     <div className="">
-      <Header />
+      
       <h1 className="mb-8 text-3xl font-bold">test</h1>
       
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">

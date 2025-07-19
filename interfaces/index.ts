@@ -12,7 +12,7 @@ export interface CardProps {
 export interface ButtonProps {
   text?: string;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'orange';
+  variant?: 'primary' | 'secondary' | 'orange' | 'white';
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
   className?: string;
