@@ -1,12 +1,4 @@
-// Props for the Card component
-export interface CardProps {
-  title?: string;
-  description?: string;
-  image?: string;
-  price?: number;
-  rating?: number;
-  location?: string;
-}
+
 
 // Props for the Button component  
 export interface ButtonProps {
@@ -37,3 +29,11 @@ export interface PropertyProps {
   image: string;
   discount: string;
 }
+
+export interface Offers {
+  bed: string;
+  shower: string;
+  occupants: string;
+}
+
+export type CardProps = PropertyProps;

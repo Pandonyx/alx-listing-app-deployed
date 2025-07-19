@@ -1,9 +1,18 @@
+'use client';
 import Image from "next/image";
-
+import ListingSection from '@/components/layout/ListingSection';
+import FilterBar from '@/components/common/FilterBar';
+import { useState } from "react";
 
 
 
 export default function Home() {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const handleFilter = (label: string) => {
+    setActiveFilter(label);
+  };
+  
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">
       <div className="relative w-full max-w-6xl h-[300px] md:h-[420px] mt-6">
@@ -18,6 +27,10 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <>
+        <FilterBar onChange={handleFilter} />
+        <ListingSection  activeFilter={activeFilter} />
+      </>
     </div>
   );
 }
