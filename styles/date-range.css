@@ -1,0 +1,28 @@
+@import 'react-date-range/dist/styles.css';
+@import 'react-date-range/dist/theme/default.css';
+
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  background: #34967C;           /* light mint strip */
+}
+
+.rdrDaySelected span {
+  background: #34967C !important;/* dark green cell */
+  color: #ffffff !important;
+}
+
+.rdrDaySelected,
+.rdrStartEdge,
+.rdrEndEdge {
+  border-radius: 6px !important; /* rounded edges */
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrDateRangeWrapper {
+  margin-left: 0 !important;
+  border-left: none !important;
+}

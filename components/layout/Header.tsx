@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../common/Button';
-import Search from '../common/Search';
+import Search from '../common/search/Search';
 import Image from 'next/image';
 import CategoryStrip from '../common/CategoryStrip';
 
