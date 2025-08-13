@@ -2,6 +2,7 @@
 import React from 'react';
 import Card from '@/components/common/Card';
 import { PROPERTYLISTINGSAMPLE, CONFIG } from '@/constants';
+import Link from 'next/link';
 
 type Props = {
   activeFilter?: string;
@@ -22,7 +23,9 @@ export default function ListingSection({ activeFilter = 'All' }: Props) {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data.slice(0, CONFIG.ITEMS_PER_PAGE).map((prop) => (
-          <Card key={prop.name} {...prop} />
+          <Link href={`/property/${prop.name}`} key={prop.name}>
+            <Card {...prop} />
+          </Link>
         ))}
       </div>
     </section>

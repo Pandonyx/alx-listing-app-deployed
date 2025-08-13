@@ -23,7 +23,7 @@ const Header = () => {
 
             <div className="flex flex-row items-center w-full px-2 py-2">
                 <div className="items-start px-4 py-2">
-                    <a href="#"><Image src="/assets/icons/alxlogo.svg" alt="ALX logo" width={150} height={150} className="p-3" /></a>
+                    <a href="/"><Image src="/assets/icons/alxlogo.svg" alt="ALX logo" width={150} height={150} className="p-3" /></a>
                     
                 </div>
                 <div className="items-center justify-center w-full ">

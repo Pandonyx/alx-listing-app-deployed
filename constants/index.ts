@@ -375,4 +375,3 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
     discount: ""
   }
 ];
-
