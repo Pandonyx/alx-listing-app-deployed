@@ -1,16 +1,16 @@
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
 import PropertyCard from "@/components/property/PropertyCard";
-import { Property } from "@/interfaces/property";
+import type { PropertyCardData } from "@/interfaces";
 
 export default function Home() {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [properties, setProperties] = useState<PropertyCardData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await api.get("/api/properties");
+        const response = await api.get<PropertyCardData[]>("/api/properties");
         setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error);

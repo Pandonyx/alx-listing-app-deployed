@@ -1,19 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { PropertyCardData } from "@/interfaces";
 
-type Property = {
-  id: string | number;
-  title: string;
-  thumbnailUrl?: string;
-  pricePerNight?: number;
-  rating?: number | null;
-  beds?: number | null;
-  baths?: number | null;
-  city?: string;
-  country?: string;
-};
-
-export default function PropertyCard({ property }: { property: Property }) {
+export default function PropertyCard({
+  property,
+}: {
+  property: PropertyCardData;
+}) {
   const {
     id,
     title,
@@ -29,15 +22,14 @@ export default function PropertyCard({ property }: { property: Property }) {
   return (
     <Link
       href={`/property/${encodeURIComponent(String(id))}`}
-      className='overflow-hidden border shadow-sm rounded-2xl block hover:shadow-md transition-shadow'
-    >
+      className='block overflow-hidden transition-shadow border shadow-sm rounded-2xl hover:shadow-md'>
       <div className='relative aspect-[4/3] bg-gray-100 overflow-hidden'>
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
             alt={title}
             fill
-            sizes="(min-width: 1024px) 33vw, 100vw"
+            sizes='(min-width: 1024px) 33vw, 100vw'
             className='object-cover'
             priority={false}
           />
@@ -59,7 +51,9 @@ export default function PropertyCard({ property }: { property: Property }) {
             {pricePerNight != null ? `$${pricePerNight}/night` : ""}
           </span>
           {rating != null && (
-            <span className='text-sm'>{"\u2605"} {Number(rating).toFixed(1)}</span>
+            <span className='text-sm'>
+              {"\u2605"} {Number(rating).toFixed(1)}
+            </span>
           )}
         </div>
 
@@ -72,4 +66,3 @@ export default function PropertyCard({ property }: { property: Property }) {
     </Link>
   );
 }
-
