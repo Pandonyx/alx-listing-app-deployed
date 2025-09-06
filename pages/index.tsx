@@ -1,6 +1,6 @@
-import axios from "axios";
+import api from "@/lib/api";
 import { useEffect, useState } from "react";
-import PropertyCard from "@/components/property/PropertyCard"; // Assume this component exists
+import PropertyCard from "@/components/property/PropertyCard";
 import { Property } from "@/interfaces/property";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("/api/properties");
+        const response = await api.get("/api/properties");
         setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error);

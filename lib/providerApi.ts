@@ -9,3 +9,4 @@ export const providerApi = axios.create({
     "X-RapidAPI-Host": process.env.AIRBNB_API_HOST!,
   },
 });
+

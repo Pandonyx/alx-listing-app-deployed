@@ -1,40 +1,14 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+type Review = { id?: string | number; comment?: string };
 
-const ReviewSection = ({ propertyId }) => {
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(
-          `/api/properties/${propertyId}/reviews`
-        );
-        setReviews(response.data);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchReviews();
-  }, [propertyId]);
-
-  if (loading) {
-    return <p>Loading reviews...</p>;
-  }
-
+export default function ReviewSection({ reviews = [] as Review[] }) {
+  if (!reviews.length) return <p className="text-sm text-gray-500">No reviews yet.</p>;
   return (
-    <div>
-      {reviews.map((review) => (
-        <div key={review.id}>
+    <div className="space-y-3">
+      {reviews.map((review, idx) => (
+        <div key={review.id ?? idx} className="p-3 bg-gray-50 rounded-xl">
           <p>{review.comment}</p>
         </div>
       ))}
     </div>
   );
-};
-
-export default ReviewSection;
+}

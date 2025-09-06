@@ -1,8 +1,10 @@
 import axios from "axios";
 
+// Axios instance for calling our Next.js API routes (same origin)
 const api = axios.create({
-  baseURL: process.env.AIRBNB_LISTING_API || "",
+  baseURL: "",
   timeout: 15000,
 });
 
 export default api;
+

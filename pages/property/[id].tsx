@@ -7,7 +7,11 @@ import ReviewSection from "@/components/property/ReviewSection";
 export default function PropertyPage() {
   const router = useRouter();
   const { id } = router.query;
-  const property = PROPERTYLISTINGSAMPLE.find((item) => item.name === id);
+
+  if (!router.isReady) return <p>Loading...</p>;
+
+  const resolvedName = typeof id === "string" ? decodeURIComponent(id) : Array.isArray(id) ? decodeURIComponent(id[0] || "") : "";
+  const property = PROPERTYLISTINGSAMPLE.find((item) => item.name === resolvedName);
 
   if (!property) return <p>Property not found</p>;
 
@@ -47,7 +51,7 @@ export default function PropertyPage() {
 
         {/* Booking Section Area */}
         <div className="sticky mt-8 lg:w-1/3 lg:mt-0 top-4">
-          <BookingSection price={property.price} />
+          <BookingSection price={property.price} propertyId={typeof id === "string" ? id : Array.isArray(id) ? id[0] : ""} />
         </div>
       </div>
     </div>

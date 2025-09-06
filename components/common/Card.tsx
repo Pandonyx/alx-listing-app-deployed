@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React from "react";
 import { CardProps } from "@/interfaces";
 import { CONFIG } from "@/constants";
 
-const fallbackImg = "/assets/images/placeholder.jpg";
+const fallbackImg = "/assets/images/Placeholder.jpg";
 
 const Card: React.FC<CardProps> = ({
   name,
@@ -15,93 +14,62 @@ const Card: React.FC<CardProps> = ({
   category = [],
   offers,
 }) => {
-  const { bed = "0", shower = "0", occupants = "0" } = offers ?? {};
-  const location = `${address.city}, ${address.country}`;
-  const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [image]);
+  const { bed = "", shower = "", occupants = "" } = offers ?? {};
+  const location = [address.city, address.country].filter(Boolean).join(", ");
+  const ratingValue = typeof rating === "number" ? rating : null;
 
   return (
-    <div className='overflow-hidden transition-shadow duration-200 bg-white shadow-sm rounded-xl hover:shadow-md'>
+    <div className='group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg'>
       {/* Image */}
-      <div className='relative w-full h-56'>
-        <Image
-          src={imageError ? fallbackImg : image || fallbackImg}
+      <div className='relative aspect-[4/3] w-full overflow-hidden bg-gray-100'>
+        <img
+          src={image || fallbackImg}
           alt={name}
-          fill
-          style={{ objectFit: "cover" }}
-          className='rounded-2xl'
-          onError={() => setImageError(true)}
-          sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+          loading='lazy'
+          onError={(e) => ((e.target as HTMLImageElement).src = fallbackImg)}
+          className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
         />
-        {discount && discount !== "0" && (
-          <span className='absolute top-3 left-3 rounded bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white'>
-            –{discount}%
+        {discount && discount !== "" && discount !== "0" && (
+          <span className='absolute top-3 left-3 rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white'>
+            -{discount}%
           </span>
         )}
       </div>
 
-      {/* Category pills */}
-      <div className='flex flex-wrap gap-2 px-4 py-3'>
-        {category.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className='px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full'>
-            {tag}
-          </span>
-        ))}
-      </div>
-
       {/* Body */}
-      <div className='px-4 pb-4'>
+      <div className='p-3'>
         {/* title + rating */}
-        <div className='flex items-start justify-between mb-1'>
-          <h3 className='text-base font-semibold text-gray-800'>{name}</h3>
-          <div className='flex items-center text-sm'>
-            <span className='text-yellow-400'>★</span>
-            <span className='ml-1 text-gray-700'>{rating.toFixed(2)}</span>
+        <div className='mb-1 flex items-start justify-between'>
+          <h3 className='line-clamp-1 text-[15px] font-semibold text-gray-900'>{name}</h3>
+          <div className='ml-2 flex flex-shrink-0 items-center text-sm text-gray-800'>
+            {ratingValue != null ? (
+              <>
+                <span className='text-yellow-500'>★</span>
+                <span className='ml-1'>{ratingValue.toFixed(2)}</span>
+              </>
+            ) : (
+              <span className='text-gray-400'>No rating</span>
+            )}
           </div>
         </div>
 
-        <p className='mb-3 text-sm text-gray-500'>{location}</p>
+        {location && (
+          <p className='mb-2 text-sm text-gray-500'>{location}</p>
+        )}
 
-        {/* Facilities pill */}
-        <div className='inline-flex items-center gap-4 px-4 py-2 mb-3 text-sm border rounded-full'>
-          <span className='flex items-center gap-1 text-gray-700'>
-            <Image
-              src='/assets/icons/bed.svg'
-              alt=''
-              width={16}
-              height={16}
-            />{" "}
-            {bed}
-          </span>
-          <span className='flex items-center gap-1 text-gray-700'>
-            <Image
-              src='/assets/icons/bathtub.svg'
-              alt=''
-              width={16}
-              height={16}
-            />{" "}
-            {shower}
-          </span>
-          <span className='flex items-center gap-1 text-gray-700'>
-            <Image
-              src='/assets/icons/guests.svg'
-              alt=''
-              width={16}
-              height={16}
-            />{" "}
-            {occupants}
-          </span>
-        </div>
+        {(bed || shower || occupants) && (
+          <p className='mb-2 text-xs text-gray-500'>
+            {[bed && `${bed} beds`, shower && `${shower} baths`, occupants && `${occupants} guests`]
+              .filter(Boolean)
+              .join(' · ')}
+          </p>
+        )}
 
-        {/* Price */}
-        <p className='flex items-center gap-1 text-sm font-semibold text-gray-800'>
-          {CONFIG.DEFAULT_CURRENCY}&nbsp;{price.toLocaleString()}
-          <span className='font-normal text-gray-500'> / n</span>
+        <p className='text-sm text-gray-900'>
+          <span className='font-semibold'>
+            {CONFIG.DEFAULT_CURRENCY}&nbsp;{Number(price).toLocaleString()}
+          </span>
+          <span className='text-gray-500'> / night</span>
         </p>
       </div>
     </div>
@@ -109,3 +77,4 @@ const Card: React.FC<CardProps> = ({
 };
 
 export default Card;
+

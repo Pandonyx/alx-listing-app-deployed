@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Property = {
   id: string | number;
   title: string;
@@ -12,6 +14,7 @@ type Property = {
 
 export default function PropertyCard({ property }: { property: Property }) {
   const {
+    id,
     title,
     thumbnailUrl,
     pricePerNight,
@@ -23,7 +26,10 @@ export default function PropertyCard({ property }: { property: Property }) {
   } = property;
 
   return (
-    <div className='overflow-hidden border shadow-sm rounded-2xl'>
+    <Link
+      href={`/property/${encodeURIComponent(String(id))}`}
+      className='overflow-hidden border shadow-sm rounded-2xl block hover:shadow-md transition-shadow'
+    >
       <div className='aspect-[4/3] bg-gray-100'>
         {thumbnailUrl ? (
           <img
@@ -59,6 +65,6 @@ export default function PropertyCard({ property }: { property: Property }) {
           {baths ? `${baths} baths` : ""}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

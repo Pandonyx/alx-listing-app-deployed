@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function BookingForm() {
+  const router = useRouter();
+  const { id, checkIn, checkOut, nights } = router.query;
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,6 +36,15 @@ export default function BookingForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Selection summary (from property page) */}
+      {(id || checkIn || checkOut) && (
+        <div className='p-3 mb-4 text-sm bg-gray-50 rounded-md'>
+          <div><strong>Property:</strong> {typeof id === 'string' ? decodeURIComponent(id) : ''}</div>
+          <div><strong>Check-in:</strong> {typeof checkIn === 'string' ? checkIn : ''}</div>
+          <div><strong>Check-out:</strong> {typeof checkOut === 'string' ? checkOut : ''}</div>
+          <div><strong>Nights:</strong> {typeof nights === 'string' ? nights : ''}</div>
+        </div>
+      )}
       {/* Form fields for booking details */}
       <button
         type='submit'
