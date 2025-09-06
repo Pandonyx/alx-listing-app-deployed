@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../common/Button';
 import Search from '../common/search/Search';
 import Image from 'next/image';
+import Link from 'next/link';
 import CategoryStrip from '../common/CategoryStrip';
 
 
@@ -23,8 +24,9 @@ const Header = () => {
 
             <div className="flex flex-row items-center w-full px-2 py-2">
                 <div className="items-start px-4 py-2">
-                    <a href="/"><Image src="/assets/icons/alxlogo.svg" alt="ALX logo" width={150} height={150} className="p-3" /></a>
-                    
+                    <Link href="/">
+                        <Image src="/assets/icons/alxlogo.svg" alt="ALX logo" width={150} height={150} className="p-3" />
+                    </Link>
                 </div>
                 <div className="items-center justify-center w-full ">
                     <Search />

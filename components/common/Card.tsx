@@ -1,5 +1,6 @@
 import React from "react";
 import { CardProps } from "@/interfaces";
+import Image from "next/image";
 import { CONFIG } from "@/constants";
 
 const fallbackImg = "/assets/images/Placeholder.jpg";
@@ -11,7 +12,7 @@ const Card: React.FC<CardProps> = ({
   rating,
   address,
   discount,
-  category = [],
+  category: _category = [],
   offers,
 }) => {
   const { bed = "", shower = "", occupants = "" } = offers ?? {};
@@ -22,12 +23,13 @@ const Card: React.FC<CardProps> = ({
     <div className='group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg'>
       {/* Image */}
       <div className='relative aspect-[4/3] w-full overflow-hidden bg-gray-100'>
-        <img
+        <Image
           src={image || fallbackImg}
           alt={name}
-          loading='lazy'
-          onError={(e) => ((e.target as HTMLImageElement).src = fallbackImg)}
-          className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+          fill
+          sizes="(min-width: 1024px) 33vw, 100vw"
+          className='object-cover transition-transform duration-300 group-hover:scale-105'
+          priority={false}
         />
         {discount && discount !== "" && discount !== "0" && (
           <span className='absolute top-3 left-3 rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white'>
@@ -44,7 +46,7 @@ const Card: React.FC<CardProps> = ({
           <div className='ml-2 flex flex-shrink-0 items-center text-sm text-gray-800'>
             {ratingValue != null ? (
               <>
-                <span className='text-yellow-500'>★</span>
+                <span className='text-yellow-500'>{'\u2605'}</span>
                 <span className='ml-1'>{ratingValue.toFixed(2)}</span>
               </>
             ) : (
@@ -61,7 +63,7 @@ const Card: React.FC<CardProps> = ({
           <p className='mb-2 text-xs text-gray-500'>
             {[bed && `${bed} beds`, shower && `${shower} baths`, occupants && `${occupants} guests`]
               .filter(Boolean)
-              .join(' · ')}
+              .join(' \u00B7 ')}
           </p>
         )}
 
@@ -71,10 +73,15 @@ const Card: React.FC<CardProps> = ({
           </span>
           <span className='text-gray-500'> / night</span>
         </p>
+        {_category && _category.length > 0 && (<span className='sr-only'>{_category.join(', ')}</span>)}
       </div>
     </div>
   );
 };
 
 export default Card;
+
+
+
+
 

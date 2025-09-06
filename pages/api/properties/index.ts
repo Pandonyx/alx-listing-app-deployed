@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { PROPERTYLISTINGSAMPLE } from "@/constants";
+import type { PropertyProps } from "@/interfaces";
+import type { Property } from "@/interfaces/property";
 
 // Maps sample listing into a minimal card-friendly shape
 function normalizeImagePath(image?: string | null) {
@@ -9,7 +11,7 @@ function normalizeImagePath(image?: string | null) {
   return image;
 }
 
-function toCardShape(item: any) {
+function toCardShape(item: PropertyProps): Property {
   const id = encodeURIComponent(item.name);
   return {
     id,

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Address = { state?: string; city?: string; country?: string };
 type Offers = { bed?: string; shower?: string; occupants?: string };
 type DetailProperty = {
@@ -15,9 +17,9 @@ export default function PropertyDetail({ property }: { property: DetailProperty 
 
   return (
     <div className="space-y-4">
-      <div className="aspect-[4/3] w-full bg-gray-100 rounded-xl overflow-hidden">
+      <div className="relative aspect-[4/3] w-full bg-gray-100 rounded-xl overflow-hidden">
         {image ? (
-          <img src={image} alt={name} className="object-cover w-full h-full" />
+          <Image src={image} alt={name} fill sizes="100vw" className="object-cover" />
         ) : (
           <div className="grid w-full h-full place-items-center text-gray-500">No image</div>
         )}
@@ -32,10 +34,11 @@ export default function PropertyDetail({ property }: { property: DetailProperty 
         <p className="text-lg font-semibold">{price != null ? `$${price}/night` : ""}</p>
         <p className="text-sm text-gray-500">
           {offers?.bed ? `${offers.bed} beds` : ""}
-          {offers?.bed && offers?.shower ? " · " : ""}
+          {offers?.bed && offers?.shower ? " \u00B7 " : ""}
           {offers?.shower ? `${offers.shower} baths` : ""}
         </p>
       </div>
     </div>
   );
 }
+

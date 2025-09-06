@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 type Property = {
   id: string | number;
@@ -30,12 +31,15 @@ export default function PropertyCard({ property }: { property: Property }) {
       href={`/property/${encodeURIComponent(String(id))}`}
       className='overflow-hidden border shadow-sm rounded-2xl block hover:shadow-md transition-shadow'
     >
-      <div className='aspect-[4/3] bg-gray-100'>
+      <div className='relative aspect-[4/3] bg-gray-100 overflow-hidden'>
         {thumbnailUrl ? (
-          <img
+          <Image
             src={thumbnailUrl}
             alt={title}
-            className='object-cover w-full h-full'
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            className='object-cover'
+            priority={false}
           />
         ) : (
           <div className='grid w-full h-full text-sm text-gray-500 place-items-center'>
@@ -52,19 +56,20 @@ export default function PropertyCard({ property }: { property: Property }) {
 
         <div className='flex items-center justify-between pt-1'>
           <span className='font-semibold'>
-            {pricePerNight != null ? `$${pricePerNight}/night` : "—"}
+            {pricePerNight != null ? `$${pricePerNight}/night` : ""}
           </span>
           {rating != null && (
-            <span className='text-sm'>⭐ {Number(rating).toFixed(1)}</span>
+            <span className='text-sm'>{"\u2605"} {Number(rating).toFixed(1)}</span>
           )}
         </div>
 
         <p className='text-xs text-gray-500'>
           {beds ? `${beds} beds` : ""}
-          {beds && baths ? " · " : ""}
+          {beds && baths ? " \u00B7 " : ""}
           {baths ? `${baths} baths` : ""}
         </p>
       </div>
     </Link>
   );
 }
+

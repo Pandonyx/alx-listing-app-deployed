@@ -79,6 +79,7 @@ export default function DateRangeField({ value, onChange }: Props) {
             inputRanges={[]}
             onChange={(ranges) => {
               const { startDate, endDate } = ranges.selection;
+              if (!startDate || !endDate) return; // TS-safe guard
               onChange({
                 from: startDate.toISOString().split('T')[0],
                 to:   endDate.toISOString().split('T')[0],

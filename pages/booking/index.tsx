@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function BookingForm() {
   const router = useRouter();
   const { id, checkIn, checkOut, nights } = router.query;
-  const [formData, setFormData] = useState({
+  const [formData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -25,9 +25,10 @@ export default function BookingForm() {
     setError(null);
 
     try {
-      const response = await axios.post("/api/bookings", formData);
+      await axios.post("/api/bookings", formData);
       alert("Booking confirmed!");
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       setError("Failed to submit booking.");
     } finally {
       setLoading(false);
